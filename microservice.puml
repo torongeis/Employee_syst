@@ -1,0 +1,6 @@
+@startuml MicroserviceArchitecture
+Frontend --> Backend : POST API
+Backend --> Database : Query
+Backend --> ConsumerService : RabbitMQ Queue
+ConsumerService --> Database : Insert/Update
+@enduml
