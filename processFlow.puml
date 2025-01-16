@@ -1,0 +1,17 @@
+@startuml EmployeeProcessFlow
+actor User
+entity Frontend
+entity Backend
+entity "RabbitMQ Queue" as RabbitMQ
+entity "Consumer Service" as ConsumerService
+entity Database
+
+User -> Frontend : Submits employee details
+Frontend -> Backend : Sends data via REST API
+Backend -> Backend : Adds paramOne & paramTwo
+Backend -> RabbitMQ : Pushes data to RabbitMQ
+RabbitMQ -> RabbitMQ : Queues messages
+RabbitMQ -> ConsumerService : Retrieves messages
+ConsumerService -> Database : Saves to MySQL
+Frontend -> Database : Lists employees from MySQL
+@enduml
